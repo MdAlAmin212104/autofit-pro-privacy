@@ -1,300 +1,541 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy — AutoFit Pro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-
-  :root{
-    --paper:#F5F6F8;
-    --paper-raised:#FFFFFF;
-    --ink:#1A1F2B;
-    --ink-soft:#444B5A;
-    --muted:#6B7280;
-    --line:#DDE1E7;
-    --navy:#1B3A5C;
-    --orange:#FF6B35;
-    --orange-dim:#FFE4D6;
-    --green:#2E7D52;
-    --green-dim:#E1F2E8;
-    --radius:10px;
-    --display: 'Space Grotesk', sans-serif;
-    --body: 'Inter', sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--body);
-    line-height:1.65;
-    font-size:16px;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  a{color:var(--navy);}
-  a:focus-visible, button:focus-visible, summary:focus-visible{
-    outline:2px solid var(--orange);
-    outline-offset:2px;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-  }
-
-  /* ===== Top bar ===== */
-  .topbar{
-    border-bottom:1px solid var(--line);
-    background:var(--paper-raised);
-    position:sticky; top:0; z-index:50;
-  }
-  .topbar-inner{
-    max-width:1180px; margin:0 auto;
-    padding:16px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-    gap:16px;
-  }
-  .brand{
-    display:flex; align-items:center; gap:10px;
-    font-family:var(--display); font-weight:700; font-size:18px;
-    letter-spacing:-0.01em;
-  }
-  .brand-mark{
-    width:30px; height:30px; border-radius:8px;
-    background:var(--navy);
-    display:flex; align-items:center; justify-content:center;
-    flex-shrink:0;
-  }
-  .brand-mark svg{width:17px; height:17px;}
-  .topbar-meta{
-    font-family:var(--mono); font-size:12px; color:var(--muted);
-  }
-
-  /* ===== Hero / spec header ===== */
-  .hero{
-    max-width:1180px; margin:0 auto;
-    padding:56px 28px 40px;
-  }
-  .eyebrow{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.08em;
-    color:var(--orange); text-transform:uppercase;
-    display:flex; align-items:center; gap:8px; margin-bottom:18px;
-  }
-  .eyebrow::before{
-    content:""; width:8px; height:8px; border-radius:50%;
-    background:var(--orange); display:inline-block;
-  }
-  h1{
-    font-family:var(--display); font-weight:700;
-    font-size:clamp(32px, 5vw, 48px);
-    line-height:1.08; letter-spacing:-0.02em;
-    margin:0 0 18px;
-    max-width:14ch;
-  }
-  .hero-sub{
-    font-size:17px; color:var(--ink-soft); max-width:62ch; margin:0 0 28px;
-  }
-  .hero-tags{
-    display:flex; flex-wrap:wrap; gap:10px;
-  }
-  .tag-pill{
-    font-family:var(--mono); font-size:12px;
-    border:1px solid var(--line); background:var(--paper-raised);
-    padding:7px 12px; border-radius:999px; color:var(--ink-soft);
-  }
-
-  /* ===== Data flow diagram (signature element) ===== */
-  .flow-wrap{
-    max-width:1180px; margin:0 auto 8px; padding:0 28px;
-  }
-  .flow-card{
-    background:var(--paper-raised);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:32px 28px;
-  }
-  .flow-title{
-    font-family:var(--mono); font-size:12px; letter-spacing:0.06em;
-    text-transform:uppercase; color:var(--muted); margin-bottom:22px;
-  }
-  .flow-row{
-    display:flex; align-items:stretch; gap:0;
-    flex-wrap:wrap;
-  }
-  .flow-node{
-    flex:1; min-width:200px;
-    border:1px solid var(--line); border-radius:12px;
-    padding:18px 16px; background:var(--paper);
-    position:relative;
-  }
-  .flow-node h4{
-    font-family:var(--display); font-size:15px; margin:0 0 8px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .flow-node p{
-    font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.55;
-  }
-  .flow-node .dot{
-    width:8px; height:8px; border-radius:50%; background:var(--navy); flex-shrink:0;
-  }
-  .flow-arrow{
-    flex:0 0 auto; display:flex; align-items:center; justify-content:center;
-    width:48px; color:var(--muted);
-  }
-  .flow-arrow svg{width:24px; height:24px;}
-  .flow-node.highlight{
-    border-color:var(--orange);
-    background:var(--orange-dim);
-  }
-  .flow-node.highlight h4{color:#B8460F;}
-  .no-collect{
-    margin-top:18px; display:flex; align-items:center; gap:10px;
-    background:var(--green-dim); border:1px solid #B9DEC6;
-    border-radius:10px; padding:13px 16px;
-    font-size:13.5px; color:#1E5E3C;
-  }
-  .no-collect svg{width:18px; height:18px; flex-shrink:0;}
-
-  /* ===== Layout: sidebar + content ===== */
-  .layout{
-    max-width:1180px; margin:0 auto;
-    padding:48px 28px 100px;
-    display:grid;
-    grid-template-columns:240px 1fr;
-    gap:56px;
-    align-items:start;
-  }
-  nav.toc{
-    position:sticky; top:84px;
-  }
-  .toc-label{
-    font-family:var(--mono); font-size:11px; letter-spacing:0.08em;
-    text-transform:uppercase; color:var(--muted); margin-bottom:14px;
-  }
-  .toc ol{
-    list-style:none; margin:0; padding:0;
-    border-left:1px solid var(--line);
-  }
-  .toc li{margin:0;}
-  .toc a{
-    display:block; text-decoration:none; color:var(--ink-soft);
-    font-size:13.5px; padding:7px 0 7px 16px;
-    border-left:2px solid transparent; margin-left:-1px;
-    transition:color .15s, border-color .15s;
-  }
-  .toc a:hover{color:var(--ink);}
-  .toc a .num{
-    font-family:var(--mono); color:var(--muted); margin-right:8px; font-size:12px;
-  }
-
-  main{min-width:0;}
-  section{
-    padding:28px 0 36px;
-    border-bottom:1px solid var(--line);
-    scroll-margin-top:84px;
-  }
-  section:last-child{border-bottom:none;}
-  .sec-head{
-    display:flex; align-items:baseline; gap:12px; margin-bottom:14px;
-  }
-  .sec-num{
-    font-family:var(--mono); color:var(--orange); font-size:13px; flex-shrink:0;
-  }
-  h2{
-    font-family:var(--display); font-size:21px; font-weight:600;
-    letter-spacing:-0.01em; margin:0;
-  }
-  h3{
-    font-family:var(--display); font-size:15.5px; font-weight:600;
-    margin:22px 0 8px;
-  }
-  p{margin:0 0 14px; color:var(--ink-soft);}
-  ul, ol.plain{margin:0 0 14px; padding-left:20px; color:var(--ink-soft);}
-  li{margin-bottom:7px;}
-  strong{color:var(--ink); font-weight:600;}
-
-  .data-table{
-    width:100%; border-collapse:collapse; margin:14px 0 22px;
-    font-size:14px;
-  }
-  .data-table th, .data-table td{
-    text-align:left; padding:10px 12px;
-    border:1px solid var(--line);
-    vertical-align:top;
-  }
-  .data-table th{
-    background:var(--paper); font-family:var(--mono); font-size:12px;
-    text-transform:uppercase; letter-spacing:0.04em; color:var(--muted);
-    font-weight:500;
-  }
-  .data-table td{color:var(--ink-soft);}
-
-  .callout{
-    border-left:3px solid var(--navy);
-    background:var(--paper-raised);
-    padding:14px 18px; border-radius:0 8px 8px 0;
-    font-size:14px; margin:16px 0;
-  }
-  .callout.warn{border-left-color:var(--orange);}
-  .callout strong{display:block; margin-bottom:4px; font-family:var(--display); font-size:13.5px;}
-
-  .placeholder{
-    background:#FFF7ED; border:1px dashed #F0B27A;
-    color:#9A5B12; padding:1px 6px; border-radius:4px;
-    font-family:var(--mono); font-size:13px;
-  }
-
-  code{
-    font-family:var(--mono); font-size:0.85em;
-    background:var(--paper); border:1px solid var(--line);
-    padding:1px 6px; border-radius:5px; color:var(--navy);
-  }
-
-  footer{
-    border-top:1px solid var(--line);
-    padding:32px 28px 60px;
-    max-width:1180px; margin:0 auto;
-    font-size:13px; color:var(--muted);
-  }
-
-  @media (max-width:880px){
-    .layout{grid-template-columns:1fr; gap:0;}
-    nav.toc{
-      position:static; margin-bottom:36px;
-      border:1px solid var(--line); border-radius:12px; padding:18px;
-      background:var(--paper-raised);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — AutoFit Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F5F6F8;
+      --paper-raised: #FFFFFF;
+      --ink: #1A1F2B;
+      --ink-soft: #444B5A;
+      --muted: #6B7280;
+      --line: #DDE1E7;
+      --navy: #1B3A5C;
+      --orange: #FF6B35;
+      --orange-dim: #FFE4D6;
+      --green: #2E7D52;
+      --green-dim: #E1F2E8;
+      --radius: 10px;
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
-    .toc ol{border-left:none;}
-    .toc a{border-left:none; padding:6px 0;}
-    .flow-row{flex-direction:column;}
-    .flow-arrow{width:auto; height:32px; transform:rotate(90deg);}
-    h1{max-width:100%;}
-  }
-</style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--navy);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    /* ===== Top bar ===== */
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-raised);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .brand-mark svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .topbar-meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ===== Hero / spec header ===== */
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 28px 40px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--orange);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 18px;
+      max-width: 14ch;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--ink-soft);
+      max-width: 62ch;
+      margin: 0 0 28px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag-pill {
+      font-family: var(--mono);
+      font-size: 12px;
+      border: 1px solid var(--line);
+      background: var(--paper-raised);
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+    }
+
+    /* ===== Data flow diagram (signature element) ===== */
+    .flow-wrap {
+      max-width: 1180px;
+      margin: 0 auto 8px;
+      padding: 0 28px;
+    }
+
+    .flow-card {
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px 28px;
+    }
+
+    .flow-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      flex: 1;
+      min-width: 200px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 16px;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .flow-node h4 {
+      font-family: var(--display);
+      font-size: 15px;
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-node p {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .flow-node .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .flow-arrow {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      color: var(--muted);
+    }
+
+    .flow-arrow svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .flow-node.highlight {
+      border-color: var(--orange);
+      background: var(--orange-dim);
+    }
+
+    .flow-node.highlight h4 {
+      color: #B8460F;
+    }
+
+    .no-collect {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green-dim);
+      border: 1px solid #B9DEC6;
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 13.5px;
+      color: #1E5E3C;
+    }
+
+    .no-collect svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Layout: sidebar + content ===== */
+    .layout {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 28px 100px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    nav.toc {
+      position: sticky;
+      top: 84px;
+    }
+
+    .toc-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid var(--line);
+    }
+
+    .toc li {
+      margin: 0;
+    }
+
+    .toc a {
+      display: block;
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      padding: 7px 0 7px 16px;
+      border-left: 2px solid transparent;
+      margin-left: -1px;
+      transition: color .15s, border-color .15s;
+    }
+
+    .toc a:hover {
+      color: var(--ink);
+    }
+
+    .toc a .num {
+      font-family: var(--mono);
+      color: var(--muted);
+      margin-right: 8px;
+      font-size: 12px;
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    section {
+      padding: 28px 0 36px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 84px;
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .sec-num {
+      font-family: var(--mono);
+      color: var(--orange);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    h3 {
+      font-family: var(--display);
+      font-size: 15.5px;
+      font-weight: 600;
+      margin: 22px 0 8px;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--ink-soft);
+    }
+
+    ul,
+    ol.plain {
+      margin: 0 0 14px;
+      padding-left: 20px;
+      color: var(--ink-soft);
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 14px;
+    }
+
+    .data-table th,
+    .data-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .data-table th {
+      background: var(--paper);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .data-table td {
+      color: var(--ink-soft);
+    }
+
+    .callout {
+      border-left: 3px solid var(--navy);
+      background: var(--paper-raised);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      margin: 16px 0;
+    }
+
+    .callout.warn {
+      border-left-color: var(--orange);
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--display);
+      font-size: 13.5px;
+    }
+
+    .placeholder {
+      background: #FFF7ED;
+      border: 1px dashed #F0B27A;
+      color: #9A5B12;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    code {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 1px 6px;
+      border-radius: 5px;
+      color: var(--navy);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 32px 28px 60px;
+      max-width: 1180px;
+      margin: 0 auto;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width:880px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      nav.toc {
+        position: static;
+        margin-bottom: 36px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+        background: var(--paper-raised);
+      }
+
+      .toc ol {
+        border-left: none;
+      }
+
+      .toc a {
+        border-left: none;
+        padding: 6px 0;
+      }
+
+      .flow-row {
+        flex-direction: column;
+      }
+
+      .flow-arrow {
+        width: auto;
+        height: 32px;
+        transform: rotate(90deg);
+      }
+
+      h1 {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <span class="brand-mark">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 13L5.5 6.5C5.8 5.6 6.7 5 7.6 5H16.4C17.3 5 18.2 5.6 18.5 6.5L21 13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="2" y="13" width="20" height="6" rx="1.5" stroke="white" stroke-width="1.8"/>
-            <circle cx="6.5" cy="19" r="1.6" fill="white"/>
-            <circle cx="17.5" cy="19" r="1.6" fill="white"/>
-          </svg>
-        </span>
+        <img src="images/logo.webp" alt="AutoFit Pro" width="40" height="40" style="border-radius: 50px;">
         AutoFit Pro
       </div>
-      <div class="topbar-meta">Last updated: <span class="placeholder">June 21, 2026</span></div>
+      <div class="topbar-meta">Last updated: <span class="date">June 22, 2026</span></div>
     </div>
   </div>
 
@@ -322,23 +563,39 @@
           <p>Products you add, edit, or remove. Fitment fields and values you configure in the AutoFit Pro admin.</p>
         </div>
         <div class="flow-arrow">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
         </div>
         <div class="flow-node highlight">
           <h4><span class="dot" style="background:#B8460F"></span>AutoFit Pro Database</h4>
-          <p>Stores fitment definitions and references to your products as tags, kept in sync with your store in real time.</p>
+          <p>Stores fitment definitions and references to your products as tags, kept synchronized with your store
+            through Shopify APIs and webhooks.</p>
         </div>
         <div class="flow-arrow">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
         </div>
         <div class="flow-node">
           <h4><span class="dot"></span>Your Storefront</h4>
-          <p>The app embed shows your fitment fields to shoppers, who search filtered results at /collections/all/tag-name.</p>
+          <p>
+            The app embed displays your fitment fields on the storefront, allowing shoppers to select vehicle details
+            and view products based on the configured fitment data.
+          </p>
         </div>
       </div>
       <div class="no-collect">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="#1E5E3C" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12L11 14L15 10" stroke="#1E5E3C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>We never collect, store, or process your customers' personal information — no names, emails, addresses, or order data ever reach our database.</span>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="#1E5E3C" stroke-width="1.6"
+            stroke-linejoin="round" />
+          <path d="M9 12L11 14L15 10" stroke="#1E5E3C" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        <span>We never collect, store, or process your customers' personal information — no names, emails, addresses, or
+          order data ever reach our database.</span>
       </div>
     </div>
   </div>
@@ -367,10 +624,13 @@
     <main>
 
       <section id="scope">
-        <div class="sec-head"><span class="sec-num">§01</span><h2>Scope of this policy</h2></div>
+        <div class="sec-head"><span class="sec-num"> 01</span>
+          <h2>Scope of this policy</h2>
+        </div>
         <p>
           This Privacy Policy applies to <strong>AutoFit Pro</strong> (the "App"), built and operated by
-          <span class="placeholder">[Your Company / Developer Name]</span> ("we," "us," "our"), available on the
+          <a href="https://mdalamin21.vercel.app/" target="_blank" rel="noopener noreferrer">Md. Al Amin Islam</a>
+          ("we," "us," "our"), available on the
           Shopify App Store. It describes how we handle data when a merchant ("you," "your store") installs the App
           on a Shopify store.
         </p>
@@ -381,16 +641,24 @@
       </section>
 
       <section id="collect">
-        <div class="sec-head"><span class="sec-num">§02</span><h2>Information we collect</h2></div>
-        <p>AutoFit Pro only reads and stores store-level and product-level data that is necessary for fitment management to work. Specifically:</p>
+        <div class="sec-head"><span class="sec-num"> 02</span>
+          <h2>Information we collect</h2>
+        </div>
+        <p>AutoFit Pro only reads and stores store-level and product-level data that is necessary for fitment management
+          to work. Specifically:</p>
         <table class="data-table">
           <thead>
-            <tr><th>Data type</th><th>What it includes</th><th>When it's synced</th></tr>
+            <tr>
+              <th>Data type</th>
+              <th>What it includes</th>
+              <th>When it's synced</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
               <td>Fitment field definitions</td>
-              <td>The custom fields you create in the AutoFit Pro admin (e.g. Year, Make, Model, Trim) and the values you assign to them.</td>
+              <td>The custom fields you create in the AutoFit Pro admin (e.g. Year, Make, Model, Trim) and the values
+                you assign to them.</td>
               <td>When you create, edit, or delete a fitment field</td>
             </tr>
             <tr>
@@ -405,12 +673,16 @@
             </tr>
           </tbody>
         </table>
-        <p>We do not collect data beyond what is required to generate fitment tags and power the storefront search widget described above.</p>
+        <p>We do not collect data beyond what is required to generate fitment tags and power the storefront search
+          widget described above.</p>
       </section>
 
       <section id="not-collect">
-        <div class="sec-head"><span class="sec-num">§03</span><h2>Information we don't collect</h2></div>
-        <p>AutoFit Pro is built to operate entirely on store and product data. We do not collect, transmit, or store:</p>
+        <div class="sec-head"><span class="sec-num"> 03</span>
+          <h2>Information we don't collect</h2>
+        </div>
+        <p>AutoFit Pro is built to operate entirely on store and product data. We do not collect, transmit, or store:
+        </p>
         <ul>
           <li>Customer names, emails, phone numbers, or shipping addresses</li>
           <li>Order, checkout, or payment information</li>
@@ -425,17 +697,28 @@
       </section>
 
       <section id="use">
-        <div class="sec-head"><span class="sec-num">§04</span><h2>How we use this information</h2></div>
+        <div class="sec-head"><span class="sec-num"> 04</span>
+          <h2>How we use this information</h2>
+        </div>
         <ul>
-          <li><strong>Field management</strong> — to let you create, edit, and organize dynamic fitment fields from the App admin.</li>
-          <li><strong>Tag generation</strong> — to convert the fitment data you assign to a product into Shopify product tags.</li>
-          <li><strong>Storefront search</strong> — to power the app embed block on your storefront, which displays your fitment fields, lets a shopper make selections, and on search returns matching products by tag at <code>/collections/all/&lt;tag-name&gt;</code>.</li>
-          <li><strong>Store-product sync</strong> — to keep fitment data accurate whenever you add, modify, or remove a product in your store.</li>
+          <li><strong>Field management</strong> — to let you create, edit, and organize dynamic fitment fields from the
+            App admin.</li>
+          <li><strong>Tag generation</strong> — to convert the fitment data you assign to a product into Shopify product
+            tags.</li>
+          <li>
+            <strong>Storefront search</strong> — to power the app embed block on your storefront, which displays your
+            fitment fields, allows shoppers to select vehicle details, and shows products based on the configured
+            fitment information.
+          </li>
+          <li><strong>Store-product sync</strong> — to keep fitment data accurate whenever you add, modify, or remove a
+            product in your store.</li>
         </ul>
       </section>
 
       <section id="sync">
-        <div class="sec-head"><span class="sec-num">§05</span><h2>Syncing &amp; updates</h2></div>
+        <div class="sec-head"><span class="sec-num"> 05</span>
+          <h2>Syncing &amp; updates</h2>
+        </div>
         <p>
           AutoFit Pro listens for product activity in your store (create, update, delete) via Shopify's APIs and
           webhooks, and reflects those changes in our database automatically. In practice this means:
@@ -448,37 +731,53 @@
       </section>
 
       <section id="storage">
-        <div class="sec-head"><span class="sec-num">§06</span><h2>Storage &amp; security</h2></div>
+        <div class="sec-head"><span class="sec-num"> 06</span>
+          <h2>Storage &amp; security</h2>
+        </div>
         <p>
-          Fitment field definitions and product references are stored in a secured, access-controlled database
-          operated by <span class="placeholder">[Database / Hosting Provider, e.g. PostgreSQL on Render/Railway/AWS]</span>.
-          Data is encrypted in transit using TLS. Access to the database is restricted to authorized personnel
-          required to operate and maintain the App.
+          Fitment field definitions and product references are stored in a secure database infrastructure managed by
+          AutoFit Pro.
+          Access is restricted to authorized systems and personnel. All data is protected during transmission using TLS
+          encryption,
+          and database access is limited to systems required for the operation, maintenance, and support of the App.
         </p>
       </section>
 
       <section id="retention">
-        <div class="sec-head"><span class="sec-num">§07</span><h2>Retention &amp; deletion</h2></div>
+        <div class="sec-head"><span class="sec-num"> 07</span>
+          <h2>Retention &amp; deletion</h2>
+        </div>
         <h3>While the App is installed</h3>
-        <p>Your store's fitment and product reference data is retained for as long as the App remains installed, so that fitment search continues to function correctly on your storefront.</p>
+        <p>Your store's fitment and product reference data is retained for as long as the App remains installed, so that
+          fitment search continues to function correctly on your storefront.</p>
         <h3>When the App is uninstalled</h3>
-        <p>When you uninstall AutoFit Pro, all data associated with your store — fitment field definitions, product references, and shop information — is automatically and permanently removed from our database.</p>
+        <p>When you uninstall AutoFit Pro, all data associated with your store — fitment field definitions, product
+          references, and shop information — is automatically and permanently removed from our database.</p>
         <h3>When a store is deactivated or closed</h3>
-        <p>If your store is deactivated, closed, or removed from Shopify, Shopify notifies the App via the mandatory <code>shop/redact</code> webhook, and we delete the corresponding store data from our systems automatically — no manual request is needed.</p>
+        <p>If your store is deactivated, closed, or removed from Shopify, Shopify notifies the App via the mandatory
+          <code>shop/redact</code> webhook, and we delete the corresponding store data from our systems automatically —
+          no manual request is needed.</p>
       </section>
 
       <section id="sharing">
-        <div class="sec-head"><span class="sec-num">§08</span><h2>Third-party sharing</h2></div>
-        <p>We do not sell, rent, or trade your store's data. We share data only with the limited service providers needed to run the App, such as:</p>
+        <div class="sec-head"><span class="sec-num"> 08</span>
+          <h2>Third-party sharing</h2>
+        </div>
+        <p>We do not sell, rent, or trade your store's data. We share data only with the limited service providers
+          needed to run the App, such as:</p>
         <ul>
-          <li>Our hosting and database infrastructure provider, <span class="placeholder">[Provider Name]</span></li>
+          <li>Our hosting and database infrastructure providers, Railway (hosting platform) and Neon PostgreSQL
+            (database service)</li>
           <li>Shopify, via its standard APIs, to read and write product and tag data on your behalf</li>
         </ul>
-        <p>These providers process data solely to deliver App functionality and are bound by their own confidentiality and security obligations.</p>
+        <p>These providers process data solely to deliver App functionality and are bound by their own confidentiality
+          and security obligations.</p>
       </section>
 
       <section id="cookies">
-        <div class="sec-head"><span class="sec-num">§09</span><h2>Cookies on your storefront</h2></div>
+        <div class="sec-head"><span class="sec-num"> 09</span>
+          <h2>Cookies on your storefront</h2>
+        </div>
         <p>
           The AutoFit Pro app embed renders the fitment search widget on your storefront. It does not set tracking
           or advertising cookies, and does not collect shopper identifiers. Any local storage used is limited to
@@ -487,14 +786,18 @@
       </section>
 
       <section id="rights">
-        <div class="sec-head"><span class="sec-num">§10</span><h2>Your rights &amp; GDPR compliance</h2></div>
+        <div class="sec-head"><span class="sec-num"> 10</span>
+          <h2>Your rights &amp; GDPR compliance</h2>
+        </div>
         <p>
           Although AutoFit Pro does not collect customer personal data, we comply with Shopify's mandatory GDPR
           webhooks as part of the Shopify App Store requirements:
         </p>
         <ul>
-          <li><code>customers/data_request</code> — acknowledged; since we hold no customer data, there is nothing to return.</li>
-          <li><code>customers/redact</code> — acknowledged; since we hold no customer data, there is nothing to redact.</li>
+          <li><code>customers/data_request</code> — acknowledged; since we hold no customer data, there is nothing to
+            return.</li>
+          <li><code>customers/redact</code> — acknowledged; since we hold no customer data, there is nothing to redact.
+          </li>
           <li><code>shop/redact</code> — triggers deletion of all store-level data described in this policy.</li>
         </ul>
         <p>
@@ -504,7 +807,9 @@
       </section>
 
       <section id="children">
-        <div class="sec-head"><span class="sec-num">§11</span><h2>Children's privacy</h2></div>
+        <div class="sec-head"><span class="sec-num"> 11</span>
+          <h2>Children's privacy</h2>
+        </div>
         <p>
           AutoFit Pro is a business-to-business tool intended for use by Shopify merchants and store
           administrators. It is not directed at children, and we do not knowingly collect data relating to
@@ -513,7 +818,9 @@
       </section>
 
       <section id="changes">
-        <div class="sec-head"><span class="sec-num">§12</span><h2>Changes to this policy</h2></div>
+        <div class="sec-head"><span class="sec-num"> 12</span>
+          <h2>Changes to this policy</h2>
+        </div>
         <p>
           We may update this Privacy Policy from time to time to reflect changes in the App's functionality or
           legal requirements. The "Last updated" date at the top of this page reflects the most recent revision.
@@ -523,13 +830,26 @@
       </section>
 
       <section id="contact">
-        <div class="sec-head"><span class="sec-num">§13</span><h2>Contact us</h2></div>
+        <div class="sec-head"><span class="sec-num"> 13</span>
+          <h2>Contact us</h2>
+        </div>
         <p>If you have questions about this Privacy Policy or how AutoFit Pro handles your store's data, contact us:</p>
         <table class="data-table">
           <tbody>
-            <tr><th>Email</th><td><span class="placeholder">support@yourdomain.com</span></td></tr>
-            <tr><th>Company</th><td><span class="placeholder">[Your Company / Developer Name]</span></td></tr>
-            <tr><th>Address</th><td><span class="placeholder">[Business Address, if required by your jurisdiction]</span></td></tr>
+            <tr>
+              <th>Company</th>
+              <td>AutoFit Pro</td>
+            </tr>
+
+            <tr>
+              <th>Developer</th>
+              <td>Md Al Amin Islam</td>
+            </tr>
+
+            <tr>
+              <th>Email</th>
+              <td>alaminislam212104@gmail.com</td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -538,10 +858,14 @@
   </div>
 
   <footer>
-    AutoFit Pro — Vehicle Fitment Management for Shopify. This document is provided as a starting template;
-    please review it with a legal professional before publishing, and replace all highlighted placeholders
-    with your actual business details.
+    AutoFit Pro — Vehicle Fitment Management App.
+
+    © 2026 AutoFit Pro. All rights reserved.
+
+    This Privacy Policy describes how AutoFit Pro collects, uses, and protects store data when merchants use our
+    application.
   </footer>
 
 </body>
+
 </html>
